@@ -29,3 +29,31 @@ function playRound(playerSelection, computerSelection) {
   console.log(result);
   return playerWin;
 }
+
+function game() {
+  let playerScore = 0;
+  let computerScore = 0;
+  let round = 5;
+
+  while (round--) {
+    let playerChoice = prompt("Please enter your play");
+    let result = playRound(playerChoice, getComputerChoice());
+    if (result > 0) {
+      playerScore++;
+    } else if (result < 0) {
+      computerScore++;
+    }
+  }
+
+  if (playerScore > computerScore) {
+    console.log("Congratulations! Humanity will live on!");
+  } else if (playerScore < computerScore) {
+    console.log(
+      "Too bad! The fate of humanity has fallen into the hands of the robots."
+    );
+  } else {
+    console.log("It's a tie! I guess humans and robots shall co-exist.");
+  }
+}
+
+game();
