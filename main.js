@@ -8,26 +8,26 @@ function capitaliseWord(str) {
 }
 
 function playRound(playerSelection, computerSelection) {
-  let player = capitaliseWord(playerSelection);
+  playerSelection = capitaliseWord(playerSelection);
   let result;
   let playerWin;
+  let winner = null;
 
-  if (player == computerSelection) {
-    result = `It's A Tie. Both players played ${player}`;
-    playerWin = 0;
+  if (playerSelection == computerSelection) {
+    result = `It's A Tie. Both players played ${playerSelection}`;
   } else if (
-    (player == "Rock" && computerSelection == "Scissors") ||
-    (player == "Paper" && computerSelection == "Rock") ||
-    (player == "Scissors" && computerSelection == "Paper")
+    (playerSelection == "Rock" && computerSelection == "Scissors") ||
+    (playerSelection == "Paper" && computerSelection == "Rock") ||
+    (playerSelection == "Scissors" && computerSelection == "Paper")
   ) {
-    result = `You Win! ${player} beats ${computerSelection}`;
-    playerWin = 1;
+    result = `You Win! ${playerSelection} beats ${computerSelection}`;
+    winner = "player";
   } else {
-    result = `You Lose! ${computerSelection} beats ${player}`;
-    playerWin = -1;
+    result = `You Lose! ${computerSelection} beats ${playerSelection}`;
+    winner = "computer";
   }
   console.log(result);
-  return playerWin;
+  return winner;
 }
 
 function game() {
@@ -35,14 +35,18 @@ function game() {
   let computerScore = 0;
   let round = 5;
 
-  while (round--) {
+  while (round) {
     let playerChoice = prompt("Please enter your play");
-    let result = playRound(playerChoice, getComputerChoice());
-    if (result > 0) {
+    let winner = playRound(playerChoice, getComputerChoice());
+    if (!winner) {
+      continue;
+    }
+    if (winner == "player") {
       playerScore++;
-    } else if (result < 0) {
+    } else if (winner == "computer") {
       computerScore++;
     }
+    round--;
   }
 
   if (playerScore > computerScore) {
@@ -51,8 +55,6 @@ function game() {
     console.log(
       "Too bad! The fate of humanity has fallen into the hands of the robots."
     );
-  } else {
-    console.log("It's a tie! I guess humans and robots shall co-exist.");
   }
 }
 
