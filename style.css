@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ffffdd;
+  font-family: "Noto Sans Mono", monospace;
+}
+
+.container {
+  max-width: 800px;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.score-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  flex-basis: 0;
+  flex-grow: 1;
+}
+
+.score-group > * {
+  padding: 20px;
+  width: 200px;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  flex-basis: 0;
+  flex-grow: 1;
+}
+
+.btn {
+  width: 200px;
+  height: 200px;
+  background-color: #016a70;
+  padding: 30px 20px;
+  border-radius: 30px;
+  transition: all 0.07s ease-in-out;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+  -webkit-box-shadow: 0px 0px 15px 0px #016a70;
+  -moz-box-shadow: 0px 60px 15px 0px #016a70;
+  box-shadow: 0px 0px 15px 0px #016a70;
+}
+
+.btn > img {
+  width: 100%;
+  height: 100%;
+}
+
+.footer {
+  padding: 10px;
+  flex-basis: 0;
+  flex-grow: 1;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+}
