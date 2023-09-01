@@ -58,7 +58,6 @@ body {
 
 .btn:hover {
   cursor: pointer;
-  transform: scale(1.1);
   -webkit-box-shadow: 0px 0px 15px 0px #016a70;
   -moz-box-shadow: 0px 60px 15px 0px #016a70;
   box-shadow: 0px 0px 15px 0px #016a70;
@@ -71,11 +70,47 @@ body {
   padding: 20px;
 }
 
-.footer {
+.result {
   padding: 10px;
   flex-basis: 0;
   flex-grow: 1;
   text-align: center;
   font-size: 32px;
   font-weight: 700;
+}
+
+.modal {
+  position: absolute;
+  padding: 20px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  display: none;
+}
+
+.modal-content {
+  background-color: #ffffdd;
+  padding: 40px 20px;
+  font-size: 32px;
+  font-weight: 700;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal-btn button {
+  padding: 10px 20px;
+  background-color: #016a70;
+  border: 1px solid #016a70;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 16px;
+  color: white;
+  transition: all 0.07 ease-in;
+}
+
+.modal-btn button:hover {
+  transform: scale(1.1);
 }

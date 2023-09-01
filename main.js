@@ -1,3 +1,10 @@
+let playerScore = 0;
+let computerScore = 0;
+const buttons = document.querySelectorAll("[data-choice]");
+const result = document.querySelector(".result");
+const modal = document.querySelector(".modal");
+const resetGameBtn = document.querySelector(".modal-btn button");
+
 function getComputerChoice() {
   let choice = ["Rock", "Paper", "Scissors"];
   return choice[Math.floor(Math.random() * choice.length)];
@@ -11,7 +18,6 @@ function playRound(playerSelection, computerSelection) {
   playerSelection = capitaliseWord(playerSelection);
   let result;
   let playerWin;
-  let winner = null;
 
   if (playerSelection == computerSelection) {
     result = `It's A Tie. Both players played ${playerSelection}`;
@@ -21,47 +27,52 @@ function playRound(playerSelection, computerSelection) {
     (playerSelection == "Scissors" && computerSelection == "Paper")
   ) {
     result = `You Win! ${playerSelection} beats ${computerSelection}`;
-    winner = "player";
+    playerScore++;
   } else {
     result = `You Lose! ${computerSelection} beats ${playerSelection}`;
-    winner = "computer";
+    computerScore++;
   }
-  console.log(result);
-  return winner;
+  displayScore();
+  return result;
 }
 
-function game() {
-  let playerScore = 0;
-  let computerScore = 0;
-  let round = 5;
-
-  while (round) {
-    let playerChoice = prompt("Please enter your play");
-    let winner = playRound(playerChoice, getComputerChoice());
-    if (!winner) {
-      continue;
-    }
-    if (winner == "player") {
-      playerScore++;
-    } else if (winner == "computer") {
-      computerScore++;
-    }
-    round--;
-  }
-
-  if (playerScore > computerScore) {
-    console.log("Congratulations! Humanity will live on!");
-  } else if (playerScore < computerScore) {
-    console.log(
-      "Too bad! The fate of humanity has fallen into the hands of the robots."
-    );
-  }
+function checkScore() {
+  if (computerScore < 5 && playerScore < 5) return;
+  let finalWinner =
+    computerScore == 5
+      ? "Better luck next time."
+      : "Congratulations, you are the winner.";
+  document.querySelector(".modal-text").textContent = finalWinner;
+  document.querySelector(".modal").style.display = "block";
 }
 
-const buttons = document.querySelectorAll("[data-choice]");
+modal.addEventListener("click", (e) => {
+  if (e.target.className == "modal") {
+    modal.style.display = "none";
+  }
+});
+
+resetGameBtn.addEventListener("click", () => {
+  playerScore = 0;
+  computerScore = 0;
+  modal.style.display = "none";
+  displayScore();
+  result.textContent = "";
+});
+
+function displayScore() {
+  document.querySelector(".player .score").textContent = playerScore;
+  document.querySelector(".computer .score").textContent = computerScore;
+}
+
 buttons.forEach((button) => {
   button.addEventListener("click", (e) => {
-    playRound(e.target.dataset.choice, getComputerChoice());
+    if (playerScore !== 5 && computerScore !== 5) {
+      result.textContent = playRound(
+        e.target.dataset.choice,
+        getComputerChoice()
+      );
+    }
+    checkScore();
   });
 });
-// game();
