@@ -58,4 +58,10 @@ function game() {
   }
 }
 
+const buttons = document.querySelectorAll("[data-choice]");
+buttons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    playRound(e.target.dataset.choice, getComputerChoice());
+  });
+});
 // game();
